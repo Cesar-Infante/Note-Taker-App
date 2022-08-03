@@ -19,15 +19,20 @@ app.use(express.json())
 /* This is telling the app to use the public folder as a static directory. */
 app.use(express.static('public'));
 
-app.get('/api/notes', (req, res) => {
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
+app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
+
+app.get('/api/notes', (req, res) => res.json(data));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-app.get('/api/db', (req, res) => res.json(data))
 
 app.listen(PORT, () => 
     console.log(`Example app listening at http://localhost:${PORT}`))
