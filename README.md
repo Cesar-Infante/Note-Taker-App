@@ -8,9 +8,7 @@ This note taker app lets you write and save notes. The app utilizes Express.js t
 
 ## Table of Contents
 * [Installation](#installation)
-* [Issues](#issues)
 * [Licenses](#licenses)
-* [Contribution](#contribution)
 * [Deployed](#deployed)
 * [Questions](#questions)
 
