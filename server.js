@@ -20,18 +20,19 @@ const data = require('./db/db.json');
 /* This is a package that is used to create a unique id for each note. */
 const uniqid = require('uniqid');
 
-/* This is a middleware that is used to parse the body of the request. */
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
 /* This is telling the app to use the public folder as a static directory. */
 app.use(express.static('public'));
+
+/* This is a middleware that is used to parse the body of the request. */
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 
 /* This is telling the app to send the index.html file when the user goes to the root route. */
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
+
 /* This is telling the app to send the notes.html file when the user goes to the note file route*/
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
