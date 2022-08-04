@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 /* This is telling the app to send the notes.html file when the user goes to the note file route*/
-app.get('/note', (req, res) => {
+app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
