@@ -84,10 +84,41 @@ app.post('/api/notes', (req, res) => {
     }
 })
 
+//delete the note from the database and remove it from the index
+app.delete('/api/notes/:id', (req, res) => {
+    let id = req.params.id
+
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            const dataBase = JSON.parse(data);
+
+            // loop through database to match IDs to delete 
+            for (i = 0; i < dataBase.length; i++) {
+                if (dataBase[i].id === id) {
+                    dataBase.splice(i, 1);
+
+                    // Update the database with deleted note
+                    fs.writeFile('./db/db.json', JSON.stringify(dataBase), err => {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            console.log('Deleted Note in Database!')
+                            return res.send("Deleted!");
+                        }
+                    })
+                }
+            }
+        }
+    })
+})
+
 /* This is telling the app to send the index.html file when the user types in anything that is not a correct route */
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
+
 
 /* This is telling the app to listen on the port number that is set. */
 app.listen(PORT, () =>
